@@ -1,5 +1,4 @@
-﻿using AwaleProject.vue;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,18 +13,23 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AwaleProject
+namespace AwaleProject.vue
 {
     /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
+    /// Logique d'interaction pour Home.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Home : UserControl
     {
-        public MainWindow()
+        public Home()
         {
             InitializeComponent();
-            Home h = new Home();
-            this.ContentArea.Navigate(h);
+        }
+
+        private void NewLocalGame(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
+            GameVue game = new GameVue();
+            mainWindow.ContentArea.Navigate(game);
         }
     }
 }

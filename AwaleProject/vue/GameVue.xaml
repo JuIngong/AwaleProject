@@ -1,0 +1,98 @@
+﻿<UserControl x:Class="AwaleProject.vue.GameVue"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AwaleProject.vue"
+             Loaded="UserControl_Loaded"
+             mc:Ignorable="d" 
+             d:DesignHeight="339" d:DesignWidth="584">
+
+    <Grid>
+        <Canvas Name="canvas1">
+            <Image Source="/AwaleProject;component/Pictures/plateau.png" Width="{Binding Path=ActualWidth, ElementName=canvas1}" Height="{Binding Path=ActualHeight, ElementName=canvas1}" Stretch="Uniform"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="77" />
+                    <RowDefinition Height="83" />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="83" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="22" />
+                    <ColumnDefinition Width="88" />
+                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition Width="88" />
+                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition Width="88" />
+                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition Width="88" />
+                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition Width="88" />
+                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition Width="88" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="1" Grid.Row="1">
+                    <TextBlock Text="{Binding Path=Board.Circular[0], Mode=TwoWay}" FontSize="45" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                    <Ellipse Name="h0"  Fill="Transparent" Cursor="Hand" MouseDown="MouseDown_Elli"/>
+                </Grid>
+                <Grid Grid.Column="3" Grid.Row="1">
+                    <TextBlock Text="{Binding Board.Circular[1]}" FontSize="45" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                    <Ellipse Name="h1" Fill="Transparent" Cursor="Hand" MouseDown="MouseDown_Elli"/>
+                </Grid>
+                <Grid Grid.Column="5" Grid.Row="1">
+                    <TextBlock Text="{Binding Board.Circular[2]}" FontSize="45" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                    <Ellipse Name="h2"  Fill="Transparent" Cursor="Hand" MouseDown="MouseDown_Elli"/>
+                </Grid>
+                <Grid  Grid.Column="7" Grid.Row="1">
+                    <TextBlock Text="{Binding Board.Circular[3]}" FontSize="45" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+
+                    <Ellipse Name="h3"  Fill="Transparent" Cursor="Hand" MouseDown="MouseDown_Elli"/>
+
+                </Grid>
+                <Grid Grid.Column="9" Grid.Row="1">
+                    <TextBlock Text="{Binding Board.Circular[4]}" FontSize="45" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                    <Ellipse Name="h4" Fill="Transparent" Cursor="Hand" MouseDown="MouseDown_Elli"/>
+                </Grid>
+                <Grid Grid.Column="11" Grid.Row="1" >
+                    <TextBlock Text="{Binding Board.Circular[5]}" FontSize="45" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+
+                    <Ellipse Name="h5" Fill="Transparent" Cursor="Hand" MouseDown="MouseDown_Elli"/>
+                </Grid>
+                <Grid Grid.Column="1" Grid.Row="3">
+                    <TextBlock Text="{Binding Board.Circular[11]}" FontSize="45" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+
+                    <Ellipse Name="h11"  Fill="Transparent" Cursor="Hand" MouseDown="MouseDown_Elli"/>
+                </Grid>
+                <Grid Grid.Column="3" Grid.Row="3">
+                    <TextBlock Text="{Binding Board.Circular[10]}" FontSize="45" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+
+                    <Ellipse Name="h10"  Fill="Transparent" Cursor="Hand" MouseDown="MouseDown_Elli"/>
+                </Grid>
+                <Grid Grid.Column="5" Grid.Row="3">
+                    <TextBlock Text="{Binding Board.Circular[9]}" FontSize="45" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+
+                    <Ellipse Name="h9"  Fill="Transparent" Cursor="Hand" MouseDown="MouseDown_Elli"/>
+                </Grid>
+                <Grid Grid.Column="7" Grid.Row="3">
+                    <TextBlock Text="{Binding Board.Circular[8]}" FontSize="45" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+
+                    <Ellipse Name="h8"  Fill="Transparent" Cursor="Hand" MouseDown="MouseDown_Elli"/>
+                </Grid>
+                <Grid Grid.Column="9" Grid.Row="3">
+                    <TextBlock Text="{Binding Board.Circular[7]}" FontSize="45" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+
+                    <Ellipse Name="h7"  Fill="Transparent" Cursor="Hand" MouseDown="MouseDown_Elli"/>
+                </Grid>
+                <Grid Grid.Column="11" Grid.Row="3">
+                    <TextBlock Text="{Binding Board.Circular[6]}" FontSize="45" HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+
+                    <Ellipse Name="h6"  Fill="Transparent" Cursor="Hand" MouseDown="MouseDown_Elli"/>
+                </Grid>
+            </Grid>
+        </Canvas>
+
+    </Grid>
+</UserControl>
+
+    

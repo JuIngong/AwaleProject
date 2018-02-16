@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2005, Marc Clifton
+Copyright (c) 2005, Marc Clifton, Modified by Florian Muller on 2018
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
@@ -32,21 +32,33 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 
-namespace Clifton.Collections.Generic
+namespace modele
 {
-	public class CircularList<T> : IEnumerable<T>, IEnumerator<T>
-	{
+	public class CircularList<T> : IEnumerable<T>, IEnumerator<T>, INotifyCollectionChanged
+    {
 		protected T[] items;
-		protected int idx;
-		protected bool loaded;
+        private int idx;
+        protected bool loaded;
 		protected int enumIdx;
 
-		/// <summary>
-		/// Constructor that initializes the list with the 
-		/// required number of items.
-		/// </summary>
-		public CircularList(int numItems)
+
+        #region INotifyCollectionChanged
+        public event NotifyCollectionChangedEventHandler CollectionChanged = delegate { };
+
+        private void OnNotifyCollectionChanged(NotifyCollectionChangedEventArgs args)
+        {
+            this.CollectionChanged?.Invoke(this, args);
+        }
+
+        #endregion INotifyCollectionChanged
+
+        /// <summary>
+        /// Constructor that initializes the list with the 
+        /// required number of items.
+        /// </summary>
+        public CircularList(int numItems)
 		{
 			if (numItems <= 0)
 			{
@@ -65,7 +77,10 @@ namespace Clifton.Collections.Generic
 		public T Value
 		{
 			get { return items[idx]; }
-			set { items[idx] = value; }
+			set {
+                items[idx] = value;
+
+            }
 		}
 
 		/// <summary>
@@ -98,8 +113,12 @@ namespace Clifton.Collections.Generic
 			set 
 			{
 				RangeCheck(index);
+                T tmp = items[index];
 				items[index] = value;
-			}
+                this.OnNotifyCollectionChanged(
+                new NotifyCollectionChangedEventArgs(
+                NotifyCollectionChangedAction.Replace, value, tmp));
+            }
 		}
 
 		/// <summary>
@@ -114,11 +133,23 @@ namespace Clifton.Collections.Generic
 			}
 		}
 
-		/// <summary>
-		/// Clears the list, resetting the current index to the 
-		/// beginning of the list and flagging the collection as unloaded.
+        /// <summary>
+		/// Advances to the previous item or wraps to the last item.
 		/// </summary>
-		public void Clear()
+        public void Previous()
+        {
+            if (--idx < 0)
+            {
+                idx = items.Length-1;
+                loaded = true;
+            }
+        }
+
+        /// <summary>
+        /// Clears the list, resetting the current index to the 
+        /// beginning of the list and flagging the collection as unloaded.
+        /// </summary>
+        public void Clear()
 		{
 			idx = 0;
 			items.Initialize();
@@ -184,7 +215,15 @@ namespace Clifton.Collections.Generic
 			get { return this[enumIdx]; }
 		}
 
-		public bool MoveNext()
+        public int Idx { get => idx;
+            set {
+                RangeCheck(value);
+                loaded = true;
+                idx = value;
+            }
+        }
+
+        public bool MoveNext()
 		{
 			++enumIdx;
 			bool ret = enumIdx < Count;
