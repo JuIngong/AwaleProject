@@ -73,8 +73,12 @@ namespace AwaleProject.modele
             myTurn = !myTurn;
             this.OnPropertyChanged("MyTurn");
             this.OnPropertyChanged("Board");
+
+            Console.WriteLine(me);
+            Console.WriteLine(other);
+
         }
-        
+
         public bool CanChose(int hole)
         {
             if(!myTurn && hole >= 0 && hole <= 5)

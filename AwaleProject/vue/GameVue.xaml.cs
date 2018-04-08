@@ -27,14 +27,29 @@ namespace AwaleProject.vue
         public GameVue()
         {
             InitializeComponent();
-            game = new Game(new Player(""), new Player(""));
+            game = new Game(new Player("Player1"), new Player("Player2"));
             DataContext = game;
         }
 
         public int Width1 { get => width; set => width = value; }
 
+
+        private void SetTour()
+        {
+            Label tour = (Label)this.FindName("tour");
+            if (game.MyTurn)
+            {
+                tour.Content = "Tour : " + game.Me.Pseudo;
+            }
+            else
+            {
+                tour.Content = "Tour : " + game.Other.Pseudo;
+
+            }
+        }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            SetTour();
         }
 
         private void MouseDown_Elli(object sender, MouseButtonEventArgs e)
@@ -44,6 +59,19 @@ namespace AwaleProject.vue
             {
                 game.ChoseHole(val);
             }
+            if (game.Me.Score >= 25) { 
+            MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
+            GameEnd end = new GameEnd(game.Me.Pseudo);
+            mainWindow.ContentArea.Navigate(end);
+        }
+            else if(game.Other.Score >= 25)
+            {
+                MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
+                GameEnd end = new GameEnd(game.Other.Pseudo);
+                mainWindow.ContentArea.Navigate(end);
+
+            }
+            SetTour();
         }
     }
 }

@@ -9,6 +9,12 @@
              d:DesignHeight="339" d:DesignWidth="584">
 
     <Grid>
+        <Label Name="player2" Content="{Binding Other.Pseudo}" Grid.Column="3" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Grid.ColumnSpan="5"/>
+        <Label Name="player2S" Content="{Binding Other.Score}" Grid.Column="3" HorizontalAlignment="Center" Margin="0,30,0,0" VerticalAlignment="Top" Grid.ColumnSpan="5"/>
+        <Label Name="tour" Content="Tour :" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="5" Panel.ZIndex="99" FontSize="16" Foreground="White"/>
+        <Label Name="player1" Content="{Binding Me.Pseudo}" Grid.Column="3" HorizontalAlignment="Center" Margin="0,0,0,35" VerticalAlignment="Bottom" Grid.ColumnSpan="5"/>
+        <Label Name="player1S" Content="{Binding Me.Score}" Grid.Column="3" HorizontalAlignment="Center" Margin="0,0,0,15" VerticalAlignment="Bottom" Grid.ColumnSpan="5"/>
+
         <Canvas Name="canvas1">
             <Image Source="/AwaleProject;component/Pictures/plateau.png" Width="{Binding Path=ActualWidth, ElementName=canvas1}" Height="{Binding Path=ActualHeight, ElementName=canvas1}" Stretch="Uniform"/>
             <Grid>

@@ -59,6 +59,9 @@
     <Compile Include="vue\GameVue.xaml.cs">
       <DependentUpon>GameVue.xaml</DependentUpon>
     </Compile>
+    <Compile Include="vue\GameEnd.xaml.cs">
+      <DependentUpon>GameEnd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="vue\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
@@ -77,6 +80,10 @@
     <Page Include="vue\GameVue.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="vue\GameEnd.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="vue\Home.xaml">
       <SubType>Designer</SubType>
