@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -56,11 +59,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="modele\Client.cs" />
+    <Compile Include="modele\Serveur.cs" />
     <Compile Include="vue\GameVue.xaml.cs">
       <DependentUpon>GameVue.xaml</DependentUpon>
     </Compile>
     <Compile Include="vue\GameEnd.xaml.cs">
       <DependentUpon>GameEnd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="vue\Histo.xaml.cs">
+      <DependentUpon>Histo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="vue\Online.xaml.cs">
+      <DependentUpon>Online.xaml</DependentUpon>
     </Compile>
     <Compile Include="vue\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
@@ -82,6 +93,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="vue\GameEnd.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="vue\Histo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="vue\Online.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -112,6 +131,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

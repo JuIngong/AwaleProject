@@ -10,10 +10,11 @@ namespace AwaleProject.modele
 {
     public class Board
     {
-        CircularList<int> circular = new CircularList<int>(12);
+        CircularList<int> circular;
 
         public Board()
         {
+            circular = new CircularList<int>(12);
             Circular.SetAll(4);
         }
 

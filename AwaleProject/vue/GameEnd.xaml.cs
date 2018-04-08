@@ -20,6 +20,10 @@ namespace AwaleProject.vue
     /// </summary>
     public partial class GameEnd : UserControl
     {
+        string ip;
+        int port;
+        bool online = false;
+        bool host;
         public GameEnd(string player)
         {
             InitializeComponent();
@@ -27,10 +31,25 @@ namespace AwaleProject.vue
             p.Content = player;
         }
 
+        public GameEnd(string player, string ip, int port, bool host)
+        {
+            InitializeComponent();
+            Label p = (Label)this.FindName("Player");
+            p.Content = player;
+            online = true;
+            this.ip = ip;
+            this.port = port;
+            this.host = host;
+        }
+
         private void NewLocalGame(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
-            GameVue game = new GameVue();
+            GameVue game;
+            if (online)
+                game = new GameVue(ip, port, host);
+            else
+                game = new GameVue();
             mainWindow.ContentArea.Navigate(game);
         }
 
@@ -42,3 +61,4 @@ namespace AwaleProject.vue
         }
     }
 }
+

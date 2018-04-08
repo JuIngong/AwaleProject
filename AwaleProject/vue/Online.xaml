@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="AwaleProject.vue.Online"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AwaleProject.vue"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center"
+               FontWeight="Bold" FontSize="20">Host</Label>
+        <Label Grid.Column="3" Grid.Row="0" HorizontalAlignment="Center"
+               FontWeight="Bold" FontSize="20">Join</Label>
+        <Label Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center"
+               FontWeight="Bold" FontSize="20">Mon Ip</Label>
+        <Label Grid.Column="3" Grid.Row="1" HorizontalAlignment="Center"
+               FontWeight="Bold" FontSize="20">Ip Serveur</Label>
+        
+        <Label Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center"
+               FontWeight="Bold" FontSize="20">Port</Label>
+        <Label Grid.Column="3" Grid.Row="3" HorizontalAlignment="Center"
+               FontWeight="Bold" FontSize="20">Port</Label>
+        <Button Grid.Column="1" Grid.Row="5" Margin="5" Click="Host">Host Game</Button>
+        <Button Grid.Column="3" Grid.Row="5" Margin="5" Click="Join">Connect to game</Button>
+        <TextBox Name="monIp" Width="150" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" Text="ip" VerticalAlignment="Center"/>
+        <TextBox Name="ipS" Width="150" Grid.Column="3" HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" Text="ip" VerticalAlignment="Center"/>
+        <TextBox Name="port" Width="150" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="4" TextWrapping="Wrap" Text="port" VerticalAlignment="Center"/>
+        <TextBox Name="portS" Width="150" Grid.Column="3" HorizontalAlignment="Center" Grid.Row="4" TextWrapping="Wrap" Text="port" VerticalAlignment="Center"/>
+
+    </Grid>
+</UserControl>

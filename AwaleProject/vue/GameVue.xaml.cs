@@ -14,6 +14,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Newtonsoft.Json;
+using System.Windows.Threading;
+using System.ComponentModel;
 
 namespace AwaleProject.vue
 {
@@ -22,16 +25,32 @@ namespace AwaleProject.vue
     /// </summary>
     public partial class GameVue : UserControl
     {
-        private int width;
         private Game game;
+        private string ip;
+        private int port;
+        private bool online = false;
+        private bool host;
+        Action emptyDelegate = delegate { };
+
         public GameVue()
         {
             InitializeComponent();
-            game = new Game(new Player("Player1"), new Player("Player2"));
+            MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
+            game = new Game(new Player(mainWindow.Pseudo), new Player("Player2"));
             DataContext = game;
         }
 
-        public int Width1 { get => width; set => width = value; }
+        public GameVue(string ip, int port, bool host)
+        {
+            InitializeComponent();
+            MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
+            online = true;
+            game = new Game(new Player(mainWindow.Pseudo), new Player("Player2"), ip, port, host);
+            this.ip = ip;
+            this.port = port;
+            this.host = host;
+            DataContext = game;
+        }
 
 
         private void SetTour()
@@ -49,6 +68,66 @@ namespace AwaleProject.vue
         }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
+            if (online)
+            {
+                BackgroundWorker worker = new BackgroundWorker();
+                worker.DoWork += worker_DoWork2;
+                worker.RunWorkerCompleted += worker_RunWorkerCompleted2;
+                worker.RunWorkerAsync();
+                
+            }
+            else
+            {
+                SetTour();
+            }
+            
+        }
+
+        void worker_DoWork2(object sender, DoWorkEventArgs e)
+        {
+            game.StartOnline();
+        }
+        void worker_RunWorkerCompleted2(object sender, RunWorkerCompletedEventArgs e)
+        {
+            SetTour();
+        }
+
+        void worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            game.ReceiveMsg();
+        }
+        void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            EndTreatment();
+        }
+
+        void EndTreatment()
+        {
+            string s = game.IsGameEnd();
+            if (game.Me.Pseudo == s)
+            {
+                game.EndGame("Victoire");
+                MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
+                GameEnd end;
+                if (online) 
+                    end = new GameEnd(game.Me.Pseudo, ip, port, host);
+                else
+                    end = new GameEnd(game.Me.Pseudo);
+                mainWindow.ContentArea.Navigate(end);
+            }
+            else if (game.Other.Pseudo == s)
+            {
+                game.EndGame("Defaite");
+
+                MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
+                GameEnd end;
+                if (online)
+                    end = new GameEnd(game.Other.Pseudo, ip, port, host);
+                else
+                    end = new GameEnd(game.Other.Pseudo);
+                mainWindow.ContentArea.Navigate(end);
+
+            }
             SetTour();
         }
 
@@ -57,21 +136,23 @@ namespace AwaleProject.vue
             int val = Int32.Parse(((Ellipse)sender).Name.Replace("h", string.Empty));
             if (game.CanChose(val))
             {
+                if (!online) { 
                 game.ChoseHole(val);
+                    EndTreatment();
             }
-            if (game.Me.Score >= 25) { 
-            MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
-            GameEnd end = new GameEnd(game.Me.Pseudo);
-            mainWindow.ContentArea.Navigate(end);
-        }
-            else if(game.Other.Score >= 25)
+            else
             {
-                MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
-                GameEnd end = new GameEnd(game.Other.Pseudo);
-                mainWindow.ContentArea.Navigate(end);
-
+                game.ChoseHoleOnline(val);
+                BackgroundWorker worker = new BackgroundWorker();
+                worker.DoWork += worker_DoWork;
+                worker.RunWorkerCompleted += worker_RunWorkerCompleted;
+                worker.RunWorkerAsync();
             }
-            SetTour();
+                
+            }
+            
+            
+
         }
     }
 }

@@ -13,7 +13,6 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -22,9 +21,8 @@
         </Grid.ColumnDefinitions>
 
         <Label Grid.Column="1" Grid.Row="0" FontFamily="Viner Hand ITC" FontWeight="Bold" FontSize="48">Menu</Label>
-        <Button Grid.Column="1" Grid.Row="1" Margin="5">Host Game</Button>
-        <Button Grid.Column="1" Grid.Row="2" Margin="5">Connect to game</Button>
-        <Button Grid.Column="1" Grid.Row="3" Margin="5" Click="NewLocalGame">Local Game</Button>
-        <Button Grid.Column="1" Grid.Row="4" Margin="5">Historique</Button>
+        <Button Grid.Column="1" Grid.Row="1" Margin="5" Click="OnlineGame">Online Game</Button>
+        <Button Grid.Column="1" Grid.Row="2" Margin="5" Click="NewLocalGame">Local Game</Button>
+        <Button Grid.Column="1" Grid.Row="3" Margin="5" Click="Button_Click">Historique</Button>
     </Grid>
 </UserControl>

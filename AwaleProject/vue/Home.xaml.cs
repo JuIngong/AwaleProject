@@ -31,5 +31,19 @@ namespace AwaleProject.vue
             GameVue game = new GameVue();
             mainWindow.ContentArea.Navigate(game);
         }
+
+        private void OnlineGame(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
+            Online game = new Online();
+            mainWindow.ContentArea.Navigate(game);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
+            Histo game = new Histo();
+            mainWindow.ContentArea.Navigate(game);
+        }
     }
 }

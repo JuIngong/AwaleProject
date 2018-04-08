@@ -21,11 +21,16 @@ namespace AwaleProject
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        string pseudo;
+
         public MainWindow()
         {
             InitializeComponent();
             Home h = new Home();
             this.ContentArea.Navigate(h);
         }
+
+        public string Pseudo { get => pseudo; set => pseudo = value; }
     }
 }
