@@ -20,11 +20,12 @@ namespace AwaleProject.vue
     /// </summary>
     public partial class Histo : UserControl
     {
-        public Histo()
+        string pseudo;
+        public Histo(string pseudo)
         {
             InitializeComponent();
             DataContext = this;
-
+            this.pseudo = pseudo;
             loadList();
         }
         private List<String> list = new List<string>();
@@ -44,7 +45,7 @@ namespace AwaleProject.vue
         private void Button_Click(object sender, RoutedEventArgs e)
         {
                 MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
-                Home game = new Home();
+                Home game = new Home(pseudo);
                 mainWindow.ContentArea.Navigate(game);
             
         }

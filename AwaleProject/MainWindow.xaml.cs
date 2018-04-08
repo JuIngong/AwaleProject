@@ -27,7 +27,7 @@ namespace AwaleProject
         public MainWindow()
         {
             InitializeComponent();
-            Home h = new Home();
+            Home h = new Home("Player1");
             this.ContentArea.Navigate(h);
         }
 

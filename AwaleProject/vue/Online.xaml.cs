@@ -21,9 +21,11 @@ namespace AwaleProject.vue
     /// </summary>
     public partial class Online : UserControl
     {
-        public Online()
+        string pseudo;
+        public Online(string pseudo)
         {
             InitializeComponent();
+            this.pseudo = pseudo;
         }
 
         private void Join(object sender, RoutedEventArgs e)
@@ -36,7 +38,7 @@ namespace AwaleProject.vue
             TextBox portT = (TextBox)FindName("portS");
             int port = Int32.Parse(portT.Text);
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
-            GameVue game = new GameVue(ip, port, false);
+            GameVue game = new GameVue(ip, port, false, pseudo);
             mainWindow.ContentArea.Navigate(game);
         }
 
@@ -47,7 +49,7 @@ namespace AwaleProject.vue
             TextBox portT = (TextBox)FindName("port");
             int port = Int32.Parse(portT.Text);
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
-            GameVue game = new GameVue(ip, port, true);
+            GameVue game = new GameVue(ip, port, true, pseudo);
             mainWindow.ContentArea.Navigate(game);
         }
     }

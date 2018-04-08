@@ -166,13 +166,15 @@ namespace AwaleProject.modele
 
         public void EndGame(string result)
         {
-            if (Host)
-            {
-                ser.Stop();
-            }
-            else
-            {
-                cli.End();
+            if (online) {
+                if ( Host)
+                {
+                    ser.Stop();
+                }
+                else
+                {
+                    cli.End();
+                }
             }
             string path = "histo";
             if (!File.Exists(path))

@@ -13,6 +13,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -24,5 +25,7 @@
         <Button Grid.Column="1" Grid.Row="1" Margin="5" Click="OnlineGame">Online Game</Button>
         <Button Grid.Column="1" Grid.Row="2" Margin="5" Click="NewLocalGame">Local Game</Button>
         <Button Grid.Column="1" Grid.Row="3" Margin="5" Click="Button_Click">Historique</Button>
+        <TextBox Name="pseudo" MinWidth="100" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="4" TextWrapping="Wrap" Text="Pseudo" VerticalAlignment="Center"/>
+
     </Grid>
 </UserControl>

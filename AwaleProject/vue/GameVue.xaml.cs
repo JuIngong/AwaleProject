@@ -32,20 +32,18 @@ namespace AwaleProject.vue
         private bool host;
         Action emptyDelegate = delegate { };
 
-        public GameVue()
+        public GameVue(String pseudo)
         {
             InitializeComponent();
-            MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
-            game = new Game(new Player(mainWindow.Pseudo), new Player("Player2"));
+            game = new Game(new Player(pseudo), new Player("Player2"));
             DataContext = game;
         }
 
-        public GameVue(string ip, int port, bool host)
+        public GameVue(string ip, int port, bool host, string pseudo)
         {
             InitializeComponent();
-            MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
             online = true;
-            game = new Game(new Player(mainWindow.Pseudo), new Player("Player2"), ip, port, host);
+            game = new Game(new Player(pseudo), new Player("Player2"), ip, port, host);
             this.ip = ip;
             this.port = port;
             this.host = host;
@@ -106,25 +104,22 @@ namespace AwaleProject.vue
             string s = game.IsGameEnd();
             if (game.Me.Pseudo == s)
             {
-                game.EndGame("Victoire");
                 MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
                 GameEnd end;
                 if (online) 
-                    end = new GameEnd(game.Me.Pseudo, ip, port, host);
+                    end = new GameEnd(game.Me.Pseudo, ip, port, host, game.Me.Pseudo);
                 else
-                    end = new GameEnd(game.Me.Pseudo);
+                    end = new GameEnd(game.Me.Pseudo, game.Me.Pseudo);
                 mainWindow.ContentArea.Navigate(end);
             }
             else if (game.Other.Pseudo == s)
             {
-                game.EndGame("Defaite");
-
                 MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
                 GameEnd end;
                 if (online)
-                    end = new GameEnd(game.Other.Pseudo, ip, port, host);
+                    end = new GameEnd(game.Other.Pseudo, ip, port, host, game.Me.Pseudo);
                 else
-                    end = new GameEnd(game.Other.Pseudo);
+                    end = new GameEnd(game.Other.Pseudo, game.Me.Pseudo);
                 mainWindow.ContentArea.Navigate(end);
 
             }

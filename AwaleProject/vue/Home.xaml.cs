@@ -20,29 +20,38 @@ namespace AwaleProject.vue
     /// </summary>
     public partial class Home : UserControl
     {
-        public Home()
+        public Home(string pseudo)
         {
             InitializeComponent();
+            TextBox p = (TextBox)FindName("pseudo");
+            p.Text = pseudo;
         }
 
         private void NewLocalGame(object sender, RoutedEventArgs e)
         {
+            TextBox p = (TextBox)FindName("pseudo");
+            string pseudo = p.Text;
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
-            GameVue game = new GameVue();
+            GameVue game = new GameVue(pseudo);
             mainWindow.ContentArea.Navigate(game);
         }
 
         private void OnlineGame(object sender, RoutedEventArgs e)
         {
+            TextBox p = (TextBox)FindName("pseudo");
+            string pseudo = p.Text;
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
-            Online game = new Online();
+            mainWindow.Pseudo = pseudo;
+            Online game = new Online(pseudo);
             mainWindow.ContentArea.Navigate(game);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            TextBox p = (TextBox)FindName("pseudo");
+            string pseudo = p.Text;
             MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
-            Histo game = new Histo();
+            Histo game = new Histo(pseudo);
             mainWindow.ContentArea.Navigate(game);
         }
     }
